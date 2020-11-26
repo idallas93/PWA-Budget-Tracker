@@ -9,13 +9,7 @@ The user is be able to add expenses and deposits to their budget with or without
 
 ### Home Page 
 Inline-style: 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
-
-### Transaction Page 
-
-Inline-style: 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
-
+![alt text](readme.png "Logo Title Text 1")
 
 Offline Functionality:
 
