@@ -16,26 +16,25 @@ request.onupgradeneeded = ({ target }) => {
 request.onsuccess = ({ target }) => {
   db = target.result;
 
-  // check if app is online before reading from db
   if (navigator.onLine) {
     checkDatabase();
   }
 };
 
 request.onerror = function(event) {
-  console.log("Woops! " + event.target.errorCode);
+  console.log("error" + event.target.errorCode);
 };
 
 function saveRecord(record) {
-  const transaction = db.transaction(["pending"], "readwrite");
-  const store = transaction.objectStore("pending");
+  const transaction = db.transaction(["waiting"], "readwrite");
+  const store = transaction.objectStore("waiting");
 
   store.add(record);
 }
 
 function checkDatabase() {
-  const transaction = db.transaction(["pending"], "readwrite");
-  const store = transaction.objectStore("pending");
+  const transaction = db.transaction(["waiting"], "readwrite");
+  const store = transaction.objectStore("waiting");
   const getAll = store.getAll();
 
   getAll.onsuccess = function() {
@@ -52,14 +51,11 @@ function checkDatabase() {
         return response.json();
       })
       .then(() => {
-        // delete records if successful
-        const transaction = db.transaction(["pending"], "readwrite");
-        const store = transaction.objectStore("pending");
+        const transaction = db.transaction(["waiting"], "readwrite");
+        const store = transaction.objectStore("waiting");
         store.clear();
       });
     }
   };
 }
-
-// listen for app coming back online
 window.addEventListener("online", checkDatabase);
